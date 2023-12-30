@@ -22,10 +22,18 @@ const listItems = products.map(product =>
 </li>
 );
 function MyButton() {
+  function handleClick() {
+    alert('You clicked me!');
+  }
+
   return (
-    <button>I'm a button</button>
+    <button onClick={handleClick}>
+      Click me
+    </button>
   );
 }
+
+
 function AboutPage() {
   return (
     <>
