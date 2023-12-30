@@ -40,3 +40,8 @@
     transform: rotate(360deg);
   }
 }
+
+.button {
+  background-color: #ff0000;
+  color: #ffffff;
+}

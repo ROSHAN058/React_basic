@@ -1,5 +1,5 @@
 import './App.css';
-
+import { useState } from 'react';
 const user = {
   name: 'Hedy Lamarr',
   imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
@@ -21,17 +21,8 @@ const listItems = products.map(product =>
   {product.title}
 </li>
 );
-function MyButton() {
-  function handleClick() {
-    alert('You clicked me!');
-  }
 
-  return (
-    <button onClick={handleClick}>
-      Click me
-    </button>
-  );
-}
+ 
 
 
 function AboutPage() {
@@ -56,11 +47,27 @@ Hedy Lamarr was an Austro-Hungarian-born American actress and technology invento
     </>
   );
 }
+function MyButton({ count, onClick }) {
+  return (
+    <button className="button" onClick={onClick}>
+      Clicked {count} times
+    </button>
+  );
+}
 export default function App() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
   return (
     <div>
-      <h1>Welcome to my app</h1>
-      <MyButton /> <AboutPage/>
+      <center><h1>Welcome </h1> </center>
+      <AboutPage/>
+      <div>
+      <h1>Counters Will update after click</h1>
+      <MyButton count={count} onClick={handleClick} />
+    </div> 
     </div>
     
   );
