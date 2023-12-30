@@ -34,7 +34,10 @@ function AboutPage() {
         }}
       />
       <h1>About</h1>
-      <p>Hello there.<br />How do you do?</p>
+      <p>Hedy Lamarr
+
+Hedy Lamarr was an Austro-Hungarian-born American actress and technology inventor.<br /></p>
+      <h1>Listed Items</h1>
       <ul>{listItems}</ul>
     </>
   );
