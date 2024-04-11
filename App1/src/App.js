@@ -1,174 +1,172 @@
 import './App.css';
 import { useState } from 'react';
-import { getImageUrl } from './utils.js';
-const user = {
-  name: 'Hedy Lamarr',
-  imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
-  imageSize: 90,
+
+const inputStyle = {
+  padding: '10px',
+  margin: '10px 0',
+  border: '1px solid #ddd',
+  borderRadius: '4px',
+  width: 'calc(100% - 22px)', // Adjust for padding and border
 };
-const products = [
-  { title: 'Tubelight', isFruit: false, id: 1 },
-  { title: 'Bulb', isFruit: false, id: 2 },
-  { title: 'Electricity', isFruit: true, id: 3 },
-];
-const today = new Date();
+const buttonStyle = {
+  padding: '10px 20px',
+  margin: '10px 0',
+  backgroundColor: 'transparent', // Set background to transparent
+  color: '#007bff', // Adjust text color as needed
+  border: '2px solid #007bff', // Add border with desired color
+  borderRadius: '20px', // Increase for more rounded corners
+  cursor: 'pointer',
+  outline: 'none', // Remove focus outline
+};
 
-function formatDate(date) {
-  return new Intl.DateTimeFormat(
-    'en-US',
-    { weekday: 'long' }
-  ).format(date);
-}
-
-const listItems = products.map(product =>
-  <li
-  key={product.id}
-  style={{
-    color: product.isFruit ? 'magenta' : 'darkgreen'
-  }}
->
-  {product.title}
-</li>
-);
-function Item({ name, isPacked }) {
-  if (isPacked) {
-    return <li className="item">{name} ✔</li>;
-  }
-  return <li className="item">{name}</li>;
-}
- 
+const formStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  width: '300px',
+  margin: 'auto',
+};
 
 
 function AboutPage() {
   return (
     <>
-    <h1>About</h1>
-      <p>Technology inventor.<br /></p>
-      <img
-        className="avatar"
-        src={user.imageUrl}
-        alt={'Photo of ' + user.name}
-        style={{ 
-          width: user.imageSize,
-          height: user.imageSize
 
-        }
-      }
-
-      />
-       <img
-      className="avatar"
-      src="https://i.imgur.com/7vQD0fPs.jpg"
-      alt="Gregorio Y. Zara"
-    />
-
-    <div>
-      <Avatar
-        size={100}
-        person={{ 
-          name: 'Katsuko Saruhashi', 
-          imageId: 'YfeOqp2'
-        }}
-      />
-      <Avatar
-        size={80}
-        person={{
-          name: 'Aklilu Lemma', 
-          imageId: 'OKS67lh'
-        }}
-      />
-      <Avatar
-        size={50}
-        person={{ 
-          name: 'Lin Lanying',
-          imageId: '1bX5QH6'
-        }}
-      />
-    </div>
-      
-      <h1>Listed Items</h1>
-      <ul>{listItems}</ul>
-      <section>
-      <h1>Sally Ride's Packing List</h1>
-      <ul>
-        <Item 
-          isPacked={true} 
-          name="Space suit" 
-        />
-        <Item 
-          isPacked={true} 
-          name="Helmet with a golden leaf" 
-        />
-        <Item 
-          isPacked={false} 
-          name="Photo of Tam" 
-        />
-      </ul>
-    </section>
     </>
   );
 }
-function Recipe({ drinkers }) {
+
+const headerStyle = {
+  backgroundColor: '#fff',
+  padding: '10px 20px',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  borderBottom: '1px solid #ddd',
+};
+
+const logoStyle = {
+  fontWeight: 'bold',
+  fontSize: '24px',
+  color: '#007bff',
+};
+
+const navStyle = {
+  listStyle: 'none',
+  display: 'flex',
+};
+
+const navItemStyle = {
+  margin: '0 10px',
+  cursor: 'pointer',
+};
+
+
+
+const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    // Implement login logic here
+    console.log('Login with:', email, password);
+  };
+
   return (
-    <ol>    
-      <li>Boil {drinkers} cups of water.</li>
-      <li>Add {drinkers} spoons of tea and {0.5 * drinkers} spoons of spice.</li>
-      <li>Add {0.5 * drinkers} cups of milk to boil and sugar to taste.</li>
-    </ol>
-  );
-}
-function MyButton({ count, onClick }) {
-  return (
-    <button className="button" onClick={onClick}>
-      Clicked {count} times
-    </button>
-  );
-}
-function Avatar({ person, size }) {
-  return (
-    <img
-      className="avatar"
-      src={getImageUrl(person)}
-      alt={person.name}
-      width={size}
-      height={size}
+    <form onSubmit={handleLogin} style={formStyle}>
+    <input
+      type="email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      placeholder="Enter your email"
+      required
+      style={inputStyle}
     />
+    <input
+      type="password"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      placeholder="Enter your password"
+      required
+      style={inputStyle}
+    />
+    <button type="submit" style={buttonStyle}>Login</button>
+  </form>
+);
+};
+
+const SignupPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleSignup = (event) => {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      console.error('Passwords do not match!');
+      return;
+    }
+    // Implement signup logic here
+    console.log('Signup with:', email, password);
+  };
+
+  return (
+    <form onSubmit={handleSignup} style={formStyle}>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Enter your email"
+        required
+        style={inputStyle}
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Enter your password"
+        required
+        style={inputStyle}
+      />
+      <input
+        type="password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        placeholder="Confirm your password"
+        required
+        style={inputStyle}
+      />
+      <button type="submit" style={buttonStyle}>Signup</button>
+    </form>
   );
-}
+};
+
+
 
 
 export default function App() {
-  const [count, setCount] = useState(0);
-
-  function handleClick() {
-    setCount(count + 1);
-  }
+  const [showLogin, setShowLogin] = useState(true);
   return (
     <div>
-      <center><h1>Welcome </h1> </center>
-      <AboutPage/>
+     
+      <AboutPage/> 
+      <header style={headerStyle}>
+      <div style={logoStyle}> </div>
+      <nav style={navStyle}>
+               <div>
+                <a style={navItemStyle} href="#jobs">Jobs</a>
+                <a style={navItemStyle} href="#companies">Companies</a>
+                <a style={navItemStyle} href="#services">Services</a>
+            <button onClick={() => setShowLogin(true)} style={buttonStyle}>Login</button>
+      <button onClick={() => setShowLogin(false)} style={buttonStyle}>Signup</button>
+      </div>
+      </nav>
+    </header>
       <div>
-      <h1>Counters Will update after click</h1>
-      <MyButton count={count} onClick={handleClick} />
+      
+      {showLogin ? <LoginPage /> : <SignupPage />}
     </div>
-    <h1>To Do List for inventor {formatDate(today)}</h1> 
-    <ul style={{
-      backgroundColor: 'blue',
-      color: 'pink'
-    }}>
-      <li>Improve the videophone</li>
-      <li>Prepare aeronautics lectures</li>
-      <li>Work on the alcohol-fuelled engine</li>
-    </ul>
-    <section>
-      <h1>Spiced Chai Recipe</h1>
-      <h2>For two</h2>
-      <Recipe drinkers={2} />
-      <h2>For a gathering</h2>
-      <Recipe drinkers={4} />
-    </section>
     </div>
-    
     
   );
 }
